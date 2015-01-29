@@ -151,9 +151,9 @@ class S2PS_Post_Select {
 
 	    $search = like_escape($_REQUEST['q']);
 
-	    $post_type = like_escape($_REQUEST['post_type']);
+	    $post_type = $_REQUEST['post_type'];
 
-	    $field_id = like_escape($_REQUEST['s2ps_post_select_field_id']);
+	    $field_id = $_REQUEST['s2ps_post_select_field_id'];
 
 	    // Don't forget that the callback here is a closure that needs to use the $search from the current scope
 	    add_filter('posts_where', function( $where ) use ($search) {
