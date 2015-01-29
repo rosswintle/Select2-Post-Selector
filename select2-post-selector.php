@@ -36,7 +36,7 @@ class S2PS_Post_Select_Instance {
 	private $item_post_type = 'post';
 	private $additional_query_params = array();
 
-	function __construct($field_id, $post_id, $meta_key, $form_field_name, $form_field_label, $post_post_type='post', $item_post_type='post', $additional_query_params=array()) {
+	function __construct($field_id, $meta_key, $form_field_name, $form_field_label, $post_post_type='post', $item_post_type='post', $additional_query_params=array()) {
 		$this->field_id = $field_id;
 		$this->meta_key = $meta_key;
 		$this->form_field_name = $form_field_name;
@@ -93,7 +93,7 @@ class S2PS_Post_Select_Instance {
 	    if ( isset( $_POST['post_type'] ) && $this->post_post_type == $_POST['post_type'] ) {
 
 	        // Check the user's permissions.
-	        if ( ! current_user_can( 'edit_post', $this->post_id ) ) {
+	        if ( ! current_user_can( 'edit_post', $post->ID ) ) {
 	            return;
 	        }
 
@@ -235,7 +235,7 @@ class S2PS_Post_Select {
 	 * Returns the id of the created instance as passed in
 	 */
 	public static function create( $field_id, $meta_key, $form_field_name, $form_field_label, $post_post_type='post', $item_post_type='post', $additional_query_params=array() ) {
-		$new_instance = new S2PS_Post_Select_Instance($field_id, $post_id, $meta_key, $form_field_name, $form_field_label, $post_post_type, $item_post_type, $additional_query_params);
+		$new_instance = new S2PS_Post_Select_Instance($field_id, $meta_key, $form_field_name, $form_field_label, $post_post_type, $item_post_type, $additional_query_params);
 		self::$instances[$field_id] = $new_instance;
 
 		return $field_id;
