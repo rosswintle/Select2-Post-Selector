@@ -105,11 +105,11 @@ class S2PS_Post_Select_Instance {
 	        }
 
 	        // The Select2 with multiple option submits a comma-separated list of vaules
-	        // but we want to store an array of IDs (for compatibility with existing
+	        // but we want to store each ID as a separate meta item (for compatibility with existing
 	        // options and queries - note that this is compatible with how the meta-box
 	        // plugin handles multiple selects)
 	        if (strpos($_POST[$this->form_field_name], ',') === false) {
-	            // No comma, must be single value - still needs to be in an array
+	            // No comma, must be single value - still needs to be in an array for now
 	            $post_ids = array( $_POST[$this->form_field_name] );
 	        } else {
 	            // There is a comma so it's explodable
@@ -117,7 +117,12 @@ class S2PS_Post_Select_Instance {
 	        }
 	        // Delete all existing entries
 	        delete_post_meta($post->ID, $this->meta_key);
-	        update_post_meta($post->ID, $this->meta_key, $post_ids, true );
+	        // Add new entries
+	        if (is_array($post_ids) && !empty($post_ids)) {
+	        	foreach($post_ids as $this_id) {
+	        		add_post_meta($post->ID, $this->meta_key, $this_id, false );
+	        	}
+	        }
 	    }
 	}
 }
