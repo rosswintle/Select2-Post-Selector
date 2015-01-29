@@ -1,6 +1,5 @@
 === Select 2 Post Selector ===
 Contributors: magicroundabout
-Donate link: http://oikos.org.uk/
 Tags: posts, custom-post-types, select2, relationships
 Requires at least: 4.0
 Tested up to: 4.1
