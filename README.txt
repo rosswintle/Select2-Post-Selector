@@ -47,6 +47,7 @@ The basic steps are:
 1. initialise the post selectors
 2. create a meta box that displays on your custom post type's edit page
 3. populate the meta box with the post selectors
+4. getting your data out
 
 _Note: all code here is prefixed with 'demo_' - please change this to an appropriate prefix for your own project or put the calls in a wrapper class or namespace of some sort._
 
@@ -58,15 +59,15 @@ You should call S2PS_Post_Select::create() for each post selector that you want 
 
 The parameters to the create method are:
 
-*   $field_id - this is the 'name' of the field - used to identify it for printing or saving - it must be unique for your post selector
-*   $meta_key - the meta_key to fetch/save data to/from
-*   $form_field_name - the name attribute of the select form field to be created
-*   $form_field_label - the label text for the select form field
-*   $post_post_type - the post type of the posts which we want the select box to appear for
-*   $item_post_type - the post type of the things to appear in the select list
-*   $additional_query_params - any additional query params for generating the list (if you want to filter what appears in the selector); this is an array of parameters that you would pass to WP_Query - you can pass pretty much anything, I think, except post_type. Using things like pagination parameters probably isn't recommended.
+*   `$field_id` - this is the 'name' of the field - used to identify it for printing or saving - it must be unique for your post selector
+*   `$meta_key` - the meta_key to fetch/save data to/from
+*   `$form_field_name` - the name attribute of the select form field to be created
+*   `$form_field_label` - the label text for the select form field
+*   `$post_post_type` - the post type of the posts which we want the select box to appear for
+*   `$item_post_type` - the post type of the things to appear in the select list
+*   `$additional_query_params` - any additional query params for generating the list (if you want to filter what appears in the selector); this is an array of parameters that you would pass to `WP_Query` - you can pass pretty much anything, I think, except post_type. Using things like pagination parameters probably isn't recommended.
 
-The first parameter, $field_id, is needed when adding the code to display the post selector, so remember what they are.
+The first parameter, `$field_id`, is needed when adding the code to display the post selector, so remember what they are.
 
 Here's some code that initialises "Related posts" and "Related resources" (of "resources" custom post type) to be displayed on the edit screen of posts.
 
@@ -78,7 +79,7 @@ function demo_create_post_selects() {
 }
 `
 
-# Create meta boxes
+## Create meta boxes
 
 This just uses a standard WordPress add_meta_box call to add a meta box to the post type that you want to display the selectors in.  The callback to print the content of the meta box (`demo_print_related_items_meta_box`) will use the code in the next section to display the post selectors.
 
@@ -90,9 +91,9 @@ function demo_add_related_items_meta_box() {
 }
 `
 
-# Add post selectors to meta boxes
+## Add post selectors to meta boxes
 
-This is the callback that is called to display the contents of the meta box.  Here we need out $field_id's from the first section of code. 
+This is the callback that is called to display the contents of the meta box.  Here we need out `$field_id`'s from the first section of code. 
 
 `
 function demo_print_related_items_meta_box( $post ) {
@@ -100,6 +101,12 @@ function demo_print_related_items_meta_box( $post ) {
     S2PS_Post_Select::display( 'related-resources' );
 }
 `
+
+## Getting data out
+
+Data is stored as regular post meta, so you can retrieve it with `get_post_meta()` calls (or other functions that get post meta for you).
+
+One important thing to note is that if multiple posts are selected in a given field then these are stored as multiple post meta entries with the same key.  So, when you call `get_post_meta()`, ensure that the `$single` parameter is set to `false` (it is by default).
 
 == Frequently Asked Questions ==
 
