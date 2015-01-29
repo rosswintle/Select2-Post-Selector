@@ -208,7 +208,7 @@ class S2PS_Post_Select {
 									'posts_per_page' => -1,
 									'post_status' => array('publish', 'draft', 'pending', 'future', 'private'),
 									'post__in' => $post_ids,
-									'post_type' => array('post', 'resources')
+									'post_type' => 'any'
 									));
 			foreach ($posts as $this_post) {
 				$result[$this_post->ID] = $this_post->post_title;
