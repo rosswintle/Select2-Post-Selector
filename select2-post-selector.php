@@ -135,7 +135,7 @@ class S2PS_Post_Select {
 	public static function enqueue_scripts_and_styles() {
 		wp_enqueue_script('select2', plugin_dir_url( __FILE__ ) . '/includes/select2-3.5.0/select2.min.js', array('jquery'), '', true);
 		wp_enqueue_style('select2', plugin_dir_url( __FILE__ ) . '/includes/select2-3.5.0/select2.css', array(), '');
-		wp_enqueue_script('ajax-chosen-s2ps', plugin_dir_url( __FILE__ ) . '/includes/ajax-select2-s2ps.js', array('jquery', 'select2'), '', true);
+		wp_enqueue_script('ajax-select2-s2ps', plugin_dir_url( __FILE__ ) . '/includes/ajax-select2-s2ps.js', array('jquery', 'select2'), '', true);
 	}
 
 	/*
