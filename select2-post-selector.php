@@ -10,7 +10,7 @@
  * Plugin Name:       Select2 Post Selector
  * Plugin URI:        http://oikos.org.uk/select2-post-selector
  * Description:       Provides developers with a simple means of creating AJAX-powered Select 2 Post Select Meta Boxes
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Ross Wintle/Oikos
  * Author URI:        http://oikos.org.uk/
  * License:           GPL-2.0+
