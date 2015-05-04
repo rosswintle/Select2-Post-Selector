@@ -123,7 +123,7 @@ I'm really sorry but I am unable to provide support on a per-project basis for t
 
 == Changelog ==
 
-= 1.0.1 =
+= 1.0.2 =
 * Fixed bug where AJAX results were unexpectedly being sorted by the browser. Who knew? You did? Oh, OK.
 * Tested on WordPress v4.2 and v4.2.1
 
@@ -134,6 +134,10 @@ I'm really sorry but I am unable to provide support on a per-project basis for t
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+* Fixed bug where AJAX results were unexpectedly being sorted by the browser. Who knew? You did? Oh, OK.
+* Tested on WordPress v4.2 and v4.2.1
 
 = 1.0.1 =
 * Fixed bug with saving empty lists
