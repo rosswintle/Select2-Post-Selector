@@ -152,8 +152,15 @@ class S2PS_Post_Select {
 	/*
 		This function is the AJAX call that does the search and echoes a JSON array of the results in format:
 		array(
-				post_id => 'post_title',
+				array(
+					'id' => <post_id>,
+					'title' => <post_title>,
+				)
 			)
+
+		Originally I did this as array( post_id => post_title ), but it turns out that browsers sort
+		AJAX results like this by the numeric ID. So I've fixed the index of each item so that it gives
+		items in the correct order in the select2 drop-down.
 	 */
 	public static function post_lookup() {
 	    global $wpdb;
@@ -185,11 +192,15 @@ class S2PS_Post_Select {
 	    $merged_query = array_merge( $default_query, $custom_query );
 	    $posts = get_posts( $merged_query );
 
+	    // We'll return a JSON-encoded result. 
 	    foreach ($posts as $this_post) {
 	        $post_title = $this_post->post_title;
 	        $id = $this_post->ID;
 
-	        $result[$id] = $post_title;
+	        $result[] = array(
+	        				'id' => $id,
+	        				'title' => $post_title,
+	        				);
 	    }
 
 	    echo json_encode($result);
